@@ -1,0 +1,24 @@
+CC = gcc
+CFLAGS = -Wall -Wextra
+LDFLAGS = -lglut -lGLU -lGL
+OBJS = main.o snake.o
+TARGET = snake_game
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+main.o: main.c snake.h
+	$(CC) $(CFLAGS) -c main.c
+
+snake.o: snake.c snake.h
+	$(CC) $(CFLAGS) -c snake.c
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+run: all
+	./$(TARGET)
+
+.PHONY: all clean run
